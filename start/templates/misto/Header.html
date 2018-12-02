@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" >
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css" >
+
+
+</head>
+<body>
+
+<div class="wraper">
+
+      <div class="container text-right  my-auto ">
+        <h1 class="center " style="color: yellowgreen">Попутний вантаж</h1>
+        <h3 class="center " style="color:yellowgreen ">Допоможи і зароби</h3>
+          <a  href="{% url 'accounts:signup' %}" ><button  type="button" class="btn bg-primary btn-lg text-center">Зареєструватись</button></a>
+          <a href="{% url 'accounts:login' %}"><button type="button" class="btn bg-primary btn-lg text-center" >Увійти</button></a>
+      </div>
+
+  </div>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>
