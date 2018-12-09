@@ -4,6 +4,8 @@ from django.contrib.auth import (
     get_user_model
 )
 
+from .models import *
+
 User = get_user_model()
 
 
@@ -85,3 +87,78 @@ class MyUserRegistrationForm(forms.ModelForm):
         email_qs = User.objects.filter(email=email1)
         if email_qs.exists():
             raise forms.ValidationError('Email address already registered!')
+
+
+class CreateBox(forms.ModelForm):
+    From = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mt-2',
+            'autofocus': '',
+            'style': 'width:66ch',
+            'placeholder': 'Звідки',
+        }
+    ))
+    To = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mt-2',
+            'autofocus': '',
+            'style': 'width:66ch',
+            'placeholder': 'Куди',
+        }
+    ))
+    name = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mt-2',
+            'autofocus': '',
+            'style': 'width:66ch',
+            'placeholder': 'Імя',
+        }
+    ))
+    lastName = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mt-2',
+            'autofocus': '',
+            'style': 'width:66ch',
+            'placeholder': 'Прізвище',
+        }
+    ))
+    number = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mt-2',
+            'autofocus': '',
+            'style': 'width:66ch',
+            'placeholder': 'Номер телефону',
+        }
+    ))
+    email = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mt-2',
+            'autofocus': '',
+            'style': 'width:66ch',
+            'placeholder': 'Електрона адреса',
+        }
+    ))
+    description = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control ',
+            'placeholder': 'Опис',
+        }
+    ))
+    image = forms.FileField(label='Прикріпіть зображення посилки',)
+    wiegth = forms.CharField(label='', widget=forms.TextInput(
+        attrs={
+
+            'class': 'form-control',
+            'placeholder': 'Вага',
+        }
+    ))
+    price = forms.DecimalField(label='', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control ',
+            'placeholder': 'Ціна',
+        }
+    ))
+
+    class Meta:
+        model = Box
+        exclude = ["slug"]

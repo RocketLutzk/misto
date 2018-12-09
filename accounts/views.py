@@ -1,5 +1,9 @@
+from typing import Dict
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+
 from .forms import MyUserLoginForm, MyUserRegistrationForm
 
 from django.contrib.auth import (
@@ -7,6 +11,7 @@ from django.contrib.auth import (
     login,
     logout,
 )
+from .forms import CreateBox
 
 
 # Create your views here.
@@ -54,3 +59,18 @@ def registration_view(request):
 def logout_view(request):
     logout(request)
     return redirect('accounts:home')
+
+
+def create_box(request):
+    form = CreateBox(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        form.instance.user = request.user
+        form.save()
+        return redirect('accounts:home')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'accounts/create_box.html', context)
