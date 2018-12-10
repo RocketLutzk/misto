@@ -2,7 +2,8 @@ from typing import Dict
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
+from .models import Box
+from django.views.generic import ListView
 
 from .forms import MyUserLoginForm, MyUserRegistrationForm
 
@@ -13,11 +14,20 @@ from django.contrib.auth import (
 )
 from .forms import CreateBox
 
+from .filters import BoxFilters
+
 
 # Create your views here.
-@login_required(login_url='accounts:login')
-def home(request):
-    return render(request, 'accounts/home.html', {})
+
+
+class Boxview(ListView):
+    model = Box
+    template_name = 'accounts/home.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = BoxFilters(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 def login_view(request):
@@ -30,7 +40,7 @@ def login_view(request):
         login(request, user)
         if next:
             return redirect(next)
-        return redirect('accounts:home')
+        return redirect('accounts:list')
     return render(request, 'accounts/login.html', {'form': form})
 
 
@@ -49,7 +59,7 @@ def registration_view(request):
             login(request, new_user)
             if next:
                 return redirect(next)
-            return redirect('accounts:home')
+            return redirect('accounts:list')
         return render(request, 'accounts/signup.html', {'form': form})
     else:
         return redirect('accounts:home')
@@ -58,7 +68,7 @@ def registration_view(request):
 @login_required(login_url='accounts:login')
 def logout_view(request):
     logout(request)
-    return redirect('accounts:home')
+    return redirect('misto:home')
 
 
 def create_box(request):
@@ -67,7 +77,7 @@ def create_box(request):
     if form.is_valid():
         form.instance.user = request.user
         form.save()
-        return redirect('accounts:home')
+        return redirect('accounts:list')
 
     context = {
         'form': form

@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'start',
     'accounts',
+    'django_filters',
+    'bootstrapform',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

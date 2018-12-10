@@ -11,11 +11,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
  <ul class="navbar-nav mr-auto">
-          <form class="form-inline  " action="">
-            <input class="form-control mr-sm-2" type="search" placeholder="Звідки" aria-label="Звідки">
-               <input class="form-control mr-sm-2" type="search" placeholder="Куди" aria-label="Куди">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Знайти</button>
-          </form>
+
       </ul>
   <div class="collapse navbar-collapse " id="navbarNavDropdown">
       <ul class="navbar-nav ml-auto">
@@ -36,17 +32,33 @@
   </div>
 
 </nav>
+    {% load bootstrap  %}
 
+    <div class="container">
+    <form method="get">
+    {{ filter.form|bootstrap }}
+    <button type="submit" class="btn btn-primary">Знайти</button>
+    </form>
+    <br>
+    <hr>
+{% for Box in filter.qs %}
 <div class="row">
         <div class="col-md-7">
           <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="{{ MEDIA_URL }}{{ Box.image.url }}" alt="">
           </a>
         </div>
         <div class="col-md-5">
-          <h3>Project One</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+          <h3>{{ Box.From}} - {{ Box.To}}</h3>
+          <p>{{ Box.description }}</p>
+            <p><b>Імя: </b>{{ Box.name }}</p>
+            <p><b>Прізвище: </b>{{ Box.lastName }}</p>
+            <p><b>Номер телефону: </b>{{ Box.number }}</p>
+            <p class="email"><b>Електрона адреса: </b>{{ Box.email }} </p>
           <a class="btn btn-primary" href="#">View Project</a>
         </div>
-      </div>
+        </div>
+
+    {%endfor%}
+    </div>
 {% endblock %}
