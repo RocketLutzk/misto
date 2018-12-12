@@ -1,5 +1,4 @@
 {% extends 'layout.html' %}
-
 {% block title %}
     Головна
 {% endblock %}
@@ -22,7 +21,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="{% url 'accounts:create_box' %}">Створити заявку</a>
-                <a class="dropdown-item" href="{% url 'accounts:user_post' %}">Мої заявки</a>
+              <a class="dropdown-item" href="{% url 'accounts:user_post' %}">Переглянути мої</a>
               <a class="dropdown-item" href="{% url 'accounts:logout' %}">Вихід</a>
             </div>
           </li>
@@ -32,16 +31,8 @@
   </div>
 
 </nav>
-    {% load bootstrap  %}
 
-    <div class="container">
-    <form method="get">
-    {{ filter.form|bootstrap }}
-    <button type="submit" class="btn btn-primary">Знайти</button>
-    </form>
-    <br>
-    <hr>
-{% for Box in filter.qs %}
+    {% for Box in user_posts %}
 <div class="row">
         <div class="col-md-7">
           <a href="#">
@@ -56,9 +47,9 @@
             <p><b>Номер телефону: </b>{{ Box.number }}</p>
             <p class="email"><b>Електрона адреса: </b>{{ Box.email }} </p>
 
+          <a class="btn btn-primary" href="#">View Project</a>
         </div>
         </div>
-<hr>
+
     {%endfor%}
-    </div>
 {% endblock %}

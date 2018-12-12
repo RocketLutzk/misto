@@ -1,19 +1,19 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Accounts | Register
+    Реєстрація
 {% endblock %}
 
 {% block content %}
     <div class="font-weight-normal text-center mt-5">
-        <h2 class="font-weight-normal">Please sign up...</h2>
+        <h2 class="font-weight-normal">Зареєструйтесь...</h2>
     </div>
     <div class="d-flex justify-content-center align-items-center mt-5" style="height: 350px;">
         <form action="{% url 'accounts:signup' %}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="btn btn-lg btn-primary mt-4" style="width: 100%;"
-                   value="Sign up"/>
+                   value="Реєстраія"/>
             <p class="mt-2 text-muted text-center">&copy; 2018-2019</p>
         </form>
     </div>

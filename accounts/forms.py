@@ -15,14 +15,14 @@ class MyUserLoginForm(forms.Form):
             'class': 'form-control mt-5',
             'autofocus': '',
             'style': 'width:66ch',
-            'placeholder': 'Enter username...',
+            'placeholder': 'Імя користувача...',
         }
     ), )
 
     password = forms.CharField(label='', widget=forms.PasswordInput(
         attrs={
             'class': 'form-control',
-            'placeholder': 'Enter password...',
+            'placeholder': 'Пароль...',
         }
     ), )
 
@@ -36,13 +36,13 @@ class MyUserLoginForm(forms.Form):
             user = authenticate(username=username, password=password)
             if not user:
                 raise forms.ValidationError(
-                    'Oh! I can\'t find that user - create user first!')
+                    'Користувача не знайдено,для початку зареєструйтесь')
             elif not user.check_password(password):
                 raise forms.ValidationError(
-                    'Oh! That password is incorrect - try again!')
+                    'Пароль не правилний!')
             elif not user.is_active:
                 raise forms.ValidationError(
-                    'Oh! That user is not active in the database!')
+                    'Користувач не активований')
 
 
 class MyUserRegistrationForm(forms.ModelForm):
@@ -51,25 +51,25 @@ class MyUserRegistrationForm(forms.ModelForm):
             'class': 'form-control mt-5',
             'autofocus': '',
             'style': 'width:66ch',
-            'placeholder': 'Enter username...',
+            'placeholder': 'Імя користувача...',
         }
     ), )
     email1 = forms.EmailField(label='', widget=forms.TextInput(
         attrs={
             'class': 'form-control',
-            'placeholder': 'Email Address...',
+            'placeholder': 'Електрона адреса',
         }
     ), )
     email2 = forms.EmailField(label='', widget=forms.TextInput(
         attrs={
             'class': 'form-control',
-            'placeholder': 'Confirm Email Address...',
+            'placeholder': 'Підтвердіть електрону адресу',
         }
     ), )
     password = forms.CharField(label='', widget=forms.PasswordInput(
         attrs={
             'class': 'form-control',
-            'placeholder': 'Enter password...',
+            'placeholder': 'Введіть пароль...',
         }
     ), )
 
@@ -161,4 +161,4 @@ class CreateBox(forms.ModelForm):
 
     class Meta:
         model = Box
-        exclude = ["slug"]
+        exclude = ["slug","author"]
