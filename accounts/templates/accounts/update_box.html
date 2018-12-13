@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Create Box
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Створіть заявку</h1>
+
+<div class="d-flex justify-content-center align-items-center">
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-lg btn-primary mt-4 text-center" style="width: 100%;"
+                   value="Create"/>
+            <p class="mt-2 text-muted text-center">&copy; 2018-2019</p>
+        </form>
+</div>
+
+{% endblock %}

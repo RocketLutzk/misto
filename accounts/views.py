@@ -1,6 +1,6 @@
 from typing import Dict
-
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Box
 from django.views.generic import ListView
@@ -31,9 +31,6 @@ class Boxview(ListView):
         return context
 
 
-class BoxUpdate(UpdateView):
-    model = Box
-    fields = ['']
 @login_required(login_url='accounts:login')
 def user_post(request):
     user = request.user
@@ -99,3 +96,21 @@ def create_box(request):
     return render(request, 'accounts/create_box.html', context)
 
 
+def box_update(request, id=None):
+    instance = get_object_or_404(Box, id=id)
+    form = CreateBox(request.POST or None, instance=instance)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return redirect('accounts:user_post')
+    context = {
+        "From": instance.From,
+        "form": form
+    }
+    return render(request, 'accounts/update_box.html', context)
+
+
+def box_delete(request, id=None):
+    instance = get_object_or_404(Box, id=id)
+    instance.delete()
+    return redirect('accounts:user_post')

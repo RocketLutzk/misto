@@ -5,7 +5,7 @@
 
 {% block content %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Попутний вантаж</a>
+  <a class="navbar-brand" href="{% url 'accounts:list' %}">Попутний вантаж</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,7 +47,8 @@
             <p><b>Номер телефону: </b>{{ Box.number }}</p>
             <p class="email"><b>Електрона адреса: </b>{{ Box.email }} </p>
 
-          <a class="btn btn-primary" href="#">View Project</a>
+          <a class="btn btn-primary" href="{% url 'accounts:update' Box.id %}">Редагувати</a>
+            <a class="btn btn-danger" href="{% url 'accounts:delete' Box.id %}">Видалити</a>
         </div>
         </div>
 
