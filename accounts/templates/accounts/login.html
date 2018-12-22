@@ -14,7 +14,9 @@
             {{ form.as_p }}
             <input type="submit" class="btn btn-lg btn-primary mt-4" style="width: 100%;"
                    value="Вхід"/>
+            <a  href="{% url 'accounts:signup' %}" ><button  type="button" class="btn btn-lg btn-primary mt-4" style="width: 100%">Зареєструватись</button></a>
             <p class="mt-2 text-muted text-center">&copy; 2018-2019</p>
         </form>
+
     </div>
 {% endblock %}

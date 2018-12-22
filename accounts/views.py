@@ -77,7 +77,7 @@ def registration_view(request):
 @login_required(login_url='accounts:login')
 def logout_view(request):
     logout(request)
-    return redirect('accounts:logout')
+    return redirect('accounts:login')
 
 
 def create_box(request):
